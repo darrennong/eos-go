@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"encoding/hex"

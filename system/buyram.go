@@ -1,28 +1,28 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	pc "github.com/darrennong/pc-go"
 )
 
-func NewBuyRAM(payer, receiver eos.AccountName, eosQuantity uint64) *eos.Action {
-	a := &eos.Action{
-		Account: AN("eosio"),
+func NewBuyRAM(payer, receiver pc.AccountName, pcQuantity uint64) *pc.Action {
+	a := &pc.Action{
+		Account: AN("potato"),
 		Name:    ActN("buyram"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: payer, Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(BuyRAM{
+		ActionData: pc.NewActionData(BuyRAM{
 			Payer:    payer,
 			Receiver: receiver,
-			Quantity: eos.NewEOSAsset(int64(eosQuantity)),
+			Quantity: pc.NewPCAsset(int64(pcQuantity)),
 		}),
 	}
 	return a
 }
 
-// BuyRAM represents the `eosio.system::buyram` action.
+// BuyRAM represents the `pcio.system::buyram` action.
 type BuyRAM struct {
-	Payer    eos.AccountName `json:"payer"`
-	Receiver eos.AccountName `json:"receiver"`
-	Quantity eos.Asset       `json:"quant"` // specified in EOS
+	Payer    pc.AccountName `json:"payer"`
+	Receiver pc.AccountName `json:"receiver"`
+	Quantity pc.Asset       `json:"quant"` // specified in pc
 }

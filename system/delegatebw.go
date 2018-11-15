@@ -1,33 +1,33 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	pc "github.com/darrennong/pc-go"
 )
 
 // NewDelegateBW returns a `delegatebw` action that lives on the
 // `eosio.system` contract.
-func NewDelegateBW(from, receiver eos.AccountName, stakeCPU, stakeNet eos.Asset, transfer bool) *eos.Action {
-	return &eos.Action{
+func NewDelegateBW(from, receiver pc.AccountName, stakeCPU, stakeNet pc.Asset, transfer bool) *pc.Action {
+	return &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("delegatebw"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: from, Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(DelegateBW{
+		ActionData: pc.NewActionData(DelegateBW{
 			From:     from,
 			Receiver: receiver,
 			StakeNet: stakeNet,
 			StakeCPU: stakeCPU,
-			Transfer: eos.Bool(transfer),
+			Transfer: pc.Bool(transfer),
 		}),
 	}
 }
 
 // DelegateBW represents the `eosio.system::delegatebw` action.
 type DelegateBW struct {
-	From     eos.AccountName `json:"from"`
-	Receiver eos.AccountName `json:"receiver"`
-	StakeNet eos.Asset       `json:"stake_net"`
-	StakeCPU eos.Asset       `json:"stake_cpu"`
-	Transfer eos.Bool        `json:"transfer"`
+	From     pc.AccountName `json:"from"`
+	Receiver pc.AccountName `json:"receiver"`
+	StakeNet pc.Asset       `json:"stake_net"`
+	StakeCPU pc.Asset       `json:"stake_cpu"`
+	Transfer pc.Bool        `json:"transfer"`
 }

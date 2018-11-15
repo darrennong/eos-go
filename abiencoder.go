@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"bytes"
@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 
 	"github.com/tidwall/gjson"
 )

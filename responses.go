@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"encoding/hex"
@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 /*

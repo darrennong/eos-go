@@ -1,18 +1,18 @@
 package forum
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
 // NewExpire is an action to expire a proposal ahead of its natural death.
-func NewExpire(proposer eos.AccountName, proposalName eos.Name) *eos.Action {
-	a := &eos.Action{
+func NewExpire(proposer pc.AccountName, proposalName pc.Name) *pc.Action {
+	a := &pc.Action{
 		Account: ForumAN,
 		Name:    ActN("expire"),
-		Authorization: []eos.PermissionLevel{
-			{Actor: proposer, Permission: eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{Actor: proposer, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(Expire{
+		ActionData: pc.NewActionData(Expire{
 			ProposalName: proposalName,
 		}),
 	}
@@ -21,5 +21,5 @@ func NewExpire(proposer eos.AccountName, proposalName eos.Name) *eos.Action {
 
 // Expire represents the `eosio.forum::propose` action.
 type Expire struct {
-	ProposalName eos.Name `json:"proposal_name"`
+	ProposalName pc.Name `json:"proposal_name"`
 }

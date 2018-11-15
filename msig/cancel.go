@@ -1,25 +1,25 @@
 package msig
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
 // NewCancel returns a `cancel` action that lives on the
 // `eosio.msig` contract.
-func NewCancel(proposer eos.AccountName, proposalName eos.Name, canceler eos.AccountName) *eos.Action {
-	return &eos.Action{
-		Account: eos.AccountName("eosio.msig"),
-		Name:    eos.ActionName("cancel"),
+func NewCancel(proposer pc.AccountName, proposalName pc.Name, canceler pc.AccountName) *pc.Action {
+	return &pc.Action{
+		Account: pc.AccountName("eosio.msig"),
+		Name:    pc.ActionName("cancel"),
 		// TODO: double check in this package that the `Actor` is always the `proposer`..
-		Authorization: []eos.PermissionLevel{
-			{Actor: canceler, Permission: eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{Actor: canceler, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(Cancel{proposer, proposalName, canceler}),
+		ActionData: pc.NewActionData(Cancel{proposer, proposalName, canceler}),
 	}
 }
 
 type Cancel struct {
-	Proposer     eos.AccountName `json:"proposer"`
-	ProposalName eos.Name        `json:"proposal_name"`
-	Canceler     eos.AccountName `json:"canceler"`
+	Proposer     pc.AccountName `json:"proposer"`
+	ProposalName pc.Name        `json:"proposal_name"`
+	Canceler     pc.AccountName `json:"canceler"`
 }

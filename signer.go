@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"crypto/sha256"
@@ -10,7 +10,7 @@ import (
 
 	"strings"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 type Signer interface {

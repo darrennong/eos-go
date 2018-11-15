@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"encoding/binary"
@@ -17,7 +17,7 @@ import (
 
 	"io/ioutil"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 var TypeSize = struct {
@@ -128,8 +128,8 @@ func (d *Decoder) Decode(v interface{}) (err error) {
 		rv.SetString(s)
 		return
 	case *Name, *AccountName, *PermissionName, *ActionName, *TableName, *ScopeName:
-		var n uint64
-		n, err = d.ReadUint64()
+		var n uint128
+		n, err = d.readUint128()
 		name := NameToString(n)
 		Logger.Decoder.Print(fmt.Sprintf("readName [%s]", name))
 		rv.SetString(name)
@@ -728,7 +728,7 @@ func (d *Decoder) ReadJSONTime() (jsonTime JSONTime, err error) {
 
 func (d *Decoder) ReadName() (out Name, err error) {
 
-	n, err := d.ReadUint64()
+	n, err := d.readUint128()
 	out = Name(NameToString(n))
 	Logger.Decoder.Print(fmt.Sprintf("readName [%s]", out))
 	return
@@ -871,6 +871,13 @@ func (d *Decoder) ReadP2PMessageEnvelope() (out *Packet, err error) {
 	return
 }
 
+func (d *Decoder) readUint128()(out uint128, err error){
+	u1,_ := d.ReadUint64()
+	u2,e2 := d.ReadUint64()
+	out = uint128{u1,u2}
+	err = e2
+	return out,err
+}
 func (d *Decoder) remaining() int {
 	return len(d.data) - d.pos
 }

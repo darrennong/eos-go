@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"bytes"
@@ -11,7 +11,7 @@ import (
 
 	"math"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 // --------------------------------------------------------------
@@ -36,7 +36,7 @@ func (e *Encoder) writeName(name Name) error {
 	if err != nil {
 		return fmt.Errorf("writeName: %s", err)
 	}
-	return e.writeUint64(val)
+	return e.writeUint128(val)
 }
 
 func (e *Encoder) Encode(v interface{}) (err error) {
@@ -307,6 +307,13 @@ func (e *Encoder) writeUint64(i uint64) (err error) {
 	Logger.Encoder.Printf("Writing uint64 [%d]\n", i)
 	buf := make([]byte, TypeSize.UInt64)
 	binary.LittleEndian.PutUint64(buf, i)
+	return e.toWriter(buf)
+
+}
+
+func (e *Encoder) writeUint128(i uint128) (err error) {
+	Logger.Encoder.Printf("Writing uint128 [%d%d]\n", i.Low,i.Up)
+	buf := i.LittleEndian()
 	return e.toWriter(buf)
 
 }

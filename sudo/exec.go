@@ -1,7 +1,7 @@
 package sudo
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
 // NewExec creates an `exec` action, found in the `eosio.sudo`
@@ -9,14 +9,14 @@ import (
 //
 // Given an `eos.Transaction`, call `eos.MarshalBinary` on it first,
 // pass the resulting bytes as `eos.HexBytes` here.
-func NewExec(executer eos.AccountName, transaction eos.HexBytes) *eos.Action {
-	a := &eos.Action{
-		Account: eos.AccountName("eosio.sudo"),
-		Name:    eos.ActionName("exec"),
-		Authorization: []eos.PermissionLevel{
-			{Actor: executer, Permission: eos.PermissionName("active")},
+func NewExec(executer pc.AccountName, transaction pc.HexBytes) *pc.Action {
+	a := &pc.Action{
+		Account: pc.AccountName("eosio.sudo"),
+		Name:    pc.ActionName("exec"),
+		Authorization: []pc.PermissionLevel{
+			{Actor: executer, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(Exec{
+		ActionData: pc.NewActionData(Exec{
 			Executer:    executer,
 			Transaction: transaction,
 		}),
@@ -26,6 +26,6 @@ func NewExec(executer eos.AccountName, transaction eos.HexBytes) *eos.Action {
 
 // Exec represents the `eosio.system::exec` action.
 type Exec struct {
-	Executer    eos.AccountName `json:"executer"`
-	Transaction eos.HexBytes    `json:"trx"`
+	Executer    pc.AccountName `json:"executer"`
+	Transaction pc.HexBytes    `json:"trx"`
 }

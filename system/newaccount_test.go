@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"testing"
 
-	eos "github.com/eoscanada/eos-go"
-	"github.com/eoscanada/eos-go/ecc"
+	 pc "github.com/darrennong/pc-go"
+	"github.com/darrennong/pc-go/ecc"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -17,16 +17,16 @@ import (
 func TestActionNewAccount(t *testing.T) {
 	pubKey, err := ecc.NewPublicKey("PUB_K1_6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV")
 	require.NoError(t, err)
-	a := &eos.Action{
-		Account: eos.AccountName("eosio"),
-		Name:    eos.ActionName("newaccount"),
-		Authorization: []eos.PermissionLevel{
-			{eos.AccountName("eosio"), eos.PermissionName("active")},
+	a := &pc.Action{
+		Account: pc.AccountName("eosio"),
+		Name:    pc.ActionName("newaccount"),
+		Authorization: []pc.PermissionLevel{
+			{eos.AccountName("eosio"), pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(NewAccount{
-			Creator: eos.AccountName("eosio"),
-			Name:    eos.AccountName("abourget"),
-			Owner: eos.Authority{
+		ActionData: pc.NewActionData(NewAccount{
+			Creator: pc.AccountName("eosio"),
+			Name:    pc.AccountName("abourget"),
+			Owner: pc.Authority{
 				Threshold: 1,
 				Keys: []eos.KeyWeight{
 					eos.KeyWeight{
@@ -35,7 +35,7 @@ func TestActionNewAccount(t *testing.T) {
 					},
 				},
 			},
-			Active: eos.Authority{
+			Active: pc.Authority{
 				Threshold: 1,
 				Keys: []eos.KeyWeight{
 					eos.KeyWeight{
@@ -47,10 +47,10 @@ func TestActionNewAccount(t *testing.T) {
 		}),
 	}
 	tx := &eos.Transaction{
-		Actions: []*eos.Action{a},
+		Actions: []*pc.Action{a},
 	}
 
-	buf, err := eos.MarshalBinary(tx)
+	buf, err := pc.MarshalBinary(tx)
 	// println(string(buf))
 	assert.NoError(t, err)
 
@@ -74,22 +74,22 @@ func TestActionNewAccount(t *testing.T) {
 }
 
 func TestMarshalTransactionAndSigned(t *testing.T) {
-	a := &eos.Action{
-		Account: eos.AccountName("eosio"),
-		Name:    eos.ActionName("newaccount"),
-		Authorization: []eos.PermissionLevel{
-			{eos.AccountName("eosio"), eos.PermissionName("active")},
+	a := &pc.Action{
+		Account: pc.AccountName("eosio"),
+		Name:    pc.ActionName("newaccount"),
+		Authorization: []pc.PermissionLevel{
+			{eos.AccountName("eosio"), pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(NewAccount{
-			Creator: eos.AccountName("eosio"),
-			Name:    eos.AccountName("abourget"),
+		ActionData: pc.NewActionData(NewAccount{
+			Creator: pc.AccountName("eosio"),
+			Name:    pc.AccountName("abourget"),
 		}),
 	}
 	tx := &eos.SignedTransaction{Transaction: &eos.Transaction{
-		Actions: []*eos.Action{a},
+		Actions: []*pc.Action{a},
 	}}
 
-	buf, err := eos.MarshalBinary(tx)
+	buf, err := pc.MarshalBinary(tx)
 	assert.NoError(t, err)
 	// 00096e88 0000 0000 00000000 0000 0000 00
 	// actions: 01
@@ -105,31 +105,31 @@ func TestMarshalTransactionAndSigned(t *testing.T) {
 }
 
 func TestMarshalTransactionAndPack(t *testing.T) {
-	a := &eos.Action{
-		Account: eos.AccountName("eosio"),
-		Name:    eos.ActionName("newaccount"),
-		Authorization: []eos.PermissionLevel{
-			{eos.AccountName("eosio"), eos.PermissionName("active")},
+	a := &pc.Action{
+		Account: pc.AccountName("eosio"),
+		Name:    pc.ActionName("newaccount"),
+		Authorization: []pc.PermissionLevel{
+			{eos.AccountName("eosio"), pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(NewAccount{
-			Creator: eos.AccountName("eosio"),
-			Name:    eos.AccountName("abourget"),
+		ActionData: pc.NewActionData(NewAccount{
+			Creator: pc.AccountName("eosio"),
+			Name:    pc.AccountName("abourget"),
 		}),
 	}
-	b := &eos.Action{
-		Account: eos.AccountName("eosio"),
-		Name:    eos.ActionName("transfer"),
-		Authorization: []eos.PermissionLevel{
-			{eos.AccountName("eosio"), eos.PermissionName("active")},
+	b := &pc.Action{
+		Account: pc.AccountName("eosio"),
+		Name:    pc.ActionName("transfer"),
+		Authorization: []pc.PermissionLevel{
+			{eos.AccountName("eosio"), pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(NewAccount{
-			Creator: eos.AccountName("eosio"),
-			Name:    eos.AccountName("cbillett"),
+		ActionData: pc.NewActionData(NewAccount{
+			Creator: pc.AccountName("eosio"),
+			Name:    pc.AccountName("cbillett"),
 		}),
 	}
 
 	tx := &eos.Transaction{
-		Actions: []*eos.Action{a, b},
+		Actions: []*pc.Action{a, b},
 	}
 
 	buf, err := json.Marshal(tx)

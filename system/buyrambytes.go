@@ -1,19 +1,19 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	pc "github.com/darrennong/pc-go"
 )
 
 // NewBuyRAMBytes will buy at current market price a given number of
 // bytes of RAM, and grant them to the `receiver` account.
-func NewBuyRAMBytes(payer, receiver eos.AccountName, bytes uint32) *eos.Action {
-	a := &eos.Action{
-		Account: AN("eosio"),
+func NewBuyRAMBytes(payer, receiver pc.AccountName, bytes uint32) *pc.Action {
+	a := &pc.Action{
+		Account: AN("potato"),
 		Name:    ActN("buyrambytes"),
-		Authorization: []eos.PermissionLevel{
-			{Actor: payer, Permission: eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{Actor: payer, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(BuyRAMBytes{
+		ActionData: pc.NewActionData(BuyRAMBytes{
 			Payer:    payer,
 			Receiver: receiver,
 			Bytes:    bytes,
@@ -22,9 +22,9 @@ func NewBuyRAMBytes(payer, receiver eos.AccountName, bytes uint32) *eos.Action {
 	return a
 }
 
-// BuyRAMBytes represents the `eosio.system::buyrambytes` action.
+// BuyRAMBytes represents the `pcio.system::buyrambytes` action.
 type BuyRAMBytes struct {
-	Payer    eos.AccountName `json:"payer"`
-	Receiver eos.AccountName `json:"receiver"`
+	Payer    pc.AccountName `json:"payer"`
+	Receiver pc.AccountName `json:"receiver"`
 	Bytes    uint32          `json:"bytes"`
 }

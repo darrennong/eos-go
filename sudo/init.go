@@ -1,10 +1,10 @@
 package sudo
 
-import eos "github.com/eoscanada/eos-go"
+import  pc "github.com/darrennong/pc-go"
 
 func init() {
 	eos.RegisterAction(AN("eosio.sudo"), ActN("exec"), Exec{})
 }
 
-var AN = eos.AN
-var ActN = eos.ActN
+var AN = pc.AN
+var ActN = pc.ActN

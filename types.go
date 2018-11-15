@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"encoding/binary"
@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 // For reference:
@@ -187,9 +187,9 @@ type SymbolCode uint64
 
 // EOSSymbol represents the standard EOS symbol on the chain.  It's
 // here just to speed up things.
-var EOSSymbol = Symbol{Precision: 4, Symbol: "EOS"}
+var PCSymbol = Symbol{Precision: 4, Symbol: "PC"}
 
-func NewEOSAssetFromString(amount string) (out Asset, err error) {
+func NewPCAssetFromString(amount string) (out Asset, err error) {
 	if len(amount) == 0 {
 		return out, fmt.Errorf("cannot be an empty string")
 	}
@@ -202,7 +202,7 @@ func NewEOSAssetFromString(amount string) (out Asset, err error) {
 		if err != nil {
 			return out, err
 		}
-		return NewEOSAsset(val * 10000), nil
+		return NewPCAsset(val * 10000), nil
 	}
 
 	parts := strings.Split(amount, ".")
@@ -218,11 +218,11 @@ func NewEOSAssetFromString(amount string) (out Asset, err error) {
 	if err != nil {
 		return out, err
 	}
-	return NewEOSAsset(val * int64(math.Pow10(4-len(parts[1])))), nil
+	return NewPCAsset(val * int64(math.Pow10(4-len(parts[1])))), nil
 }
 
-func NewEOSAsset(amount int64) Asset {
-	return Asset{Amount: amount, Symbol: EOSSymbol}
+func NewPCAsset(amount int64) Asset {
+	return Asset{Amount: amount, Symbol: PCSymbol}
 }
 
 // NewAsset parses a string like `1000.0000 EOS` into a properly setup Asset

@@ -1,17 +1,17 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
-func NewSetRAMRate(bytesPerBlock uint16) *eos.Action {
-	a := &eos.Action{
+func NewSetRAMRate(bytesPerBlock uint16) *pc.Action {
+	a := &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("setram"),
-		Authorization: []eos.PermissionLevel{
-			{AN("eosio"), eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{AN("eosio"), pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(SetRAMRate{
+		ActionData: pc.NewActionData(SetRAMRate{
 			BytesPerBlock: bytesPerBlock,
 		}),
 	}

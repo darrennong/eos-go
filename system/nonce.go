@@ -1,19 +1,19 @@
 package system
 
-import "github.com/eoscanada/eos-go"
+import "github.com/darrennong/pc-go"
 
 // NewNonce returns a `nonce` action that lives on the
 // `eosio.bios` contract. It should exist only when booting a new
 // network, as it is replaced using the `eos-bios` boot process by the
 // `eosio.system` contract.
-func NewNonce(nonce string) *eos.Action {
-	a := &eos.Action{
+func NewNonce(nonce string) *pc.Action {
+	a := &pc.Action{
 		Account:       AN("eosio"),
 		Name:          ActN("nonce"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			//{Actor: AN("eosio"), Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(Nonce{
+		ActionData: pc.NewActionData(Nonce{
 			Value: nonce,
 		}),
 	}

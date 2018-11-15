@@ -6,13 +6,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/eoscanada/eos-go/btcsuite/btcd/btcec"
-	"github.com/eoscanada/eos-go/btcsuite/btcutil/base58"
+	"github.com/darrennong/pc-go/btcsuite/btcd/btcec"
+	"github.com/darrennong/pc-go/btcsuite/btcutil/base58"
 	"golang.org/x/crypto/ripemd160"
 )
 
 const PublicKeyPrefix = "PUB_"
-const PublicKeyPrefixCompat = "EOS"
+const PublicKeyPrefixCompat = "PC"
 
 type PublicKey struct {
 	Curve   CurveID

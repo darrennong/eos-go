@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
-func NewSetContract(account eos.AccountName, wasmPath, abiPath string) (out []*eos.Action, err error) {
+func NewSetContract(account pc.AccountName, wasmPath, abiPath string) (out []*pc.Action, err error) {
 	codeContent, err := ioutil.ReadFile(wasmPath)
 	if err != nil {
 		return nil, err
@@ -19,115 +19,115 @@ func NewSetContract(account eos.AccountName, wasmPath, abiPath string) (out []*e
 		return nil, err
 	}
 
-	var abiDef eos.ABI
+	var abiDef pc.ABI
 	if err := json.Unmarshal(abiContent, &abiDef); err != nil {
 		return nil, fmt.Errorf("unmarshal ABI file: %s", err)
 	}
 
-	abiPacked, err := eos.MarshalBinary(abiDef)
+	abiPacked, err := pc.MarshalBinary(abiDef)
 	if err != nil {
 		return nil, fmt.Errorf("packing ABI: %s", err)
 	}
 
-	actions := []*eos.Action{
+	actions := []*pc.Action{
 		{
 			Account: AN("eosio"),
 			Name:    ActN("setcode"),
-			Authorization: []eos.PermissionLevel{
-				{account, eos.PermissionName("active")},
+			Authorization: []pc.PermissionLevel{
+				{account, pc.PermissionName("active")},
 			},
-			ActionData: eos.NewActionData(SetCode{
+			ActionData: pc.NewActionData(SetCode{
 				Account:   account,
 				VMType:    0,
 				VMVersion: 0,
-				Code:      eos.HexBytes(codeContent),
+				Code:      pc.HexBytes(codeContent),
 			}),
 		},
 		{
 			Account: AN("eosio"),
 			Name:    ActN("setabi"),
-			Authorization: []eos.PermissionLevel{
-				{account, eos.PermissionName("active")},
+			Authorization: []pc.PermissionLevel{
+				{account, pc.PermissionName("active")},
 			},
-			ActionData: eos.NewActionData(SetABI{
+			ActionData: pc.NewActionData(SetABI{
 				Account: account,
-				ABI:     eos.HexBytes(abiPacked),
+				ABI:     pc.HexBytes(abiPacked),
 			}),
 		},
 	}
 	return actions, nil
 }
 
-func NewSetCode(account eos.AccountName, wasmPath string) (out *eos.Action, err error) {
+func NewSetCode(account pc.AccountName, wasmPath string) (out *pc.Action, err error) {
 	codeContent, err := ioutil.ReadFile(wasmPath)
 	if err != nil {
 		return nil, err
 	}
 
-	return &eos.Action{
+	return &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("setcode"),
-		Authorization: []eos.PermissionLevel{
-			{account, eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{account, pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(SetCode{
+		ActionData: pc.NewActionData(SetCode{
 			Account:   account,
 			VMType:    0,
 			VMVersion: 0,
-			Code:      eos.HexBytes(codeContent),
+			Code:      pc.HexBytes(codeContent),
 		}),
 	}, nil
 }
 
-func NewSetABI(account eos.AccountName, abiPath string) (out *eos.Action, err error) {
+func NewSetABI(account pc.AccountName, abiPath string) (out *pc.Action, err error) {
 	abiContent, err := ioutil.ReadFile(abiPath)
 	if err != nil {
 		return nil, err
 	}
 
-	var abiDef eos.ABI
+	var abiDef pc.ABI
 	if err := json.Unmarshal(abiContent, &abiDef); err != nil {
 		return nil, fmt.Errorf("unmarshal ABI file: %s", err)
 	}
 
-	abiPacked, err := eos.MarshalBinary(abiDef)
+	abiPacked, err := pc.MarshalBinary(abiDef)
 	if err != nil {
 		return nil, fmt.Errorf("packing ABI: %s", err)
 	}
 
-	return &eos.Action{
+	return &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("setabi"),
-		Authorization: []eos.PermissionLevel{
-			{account, eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{account, pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(SetABI{
+		ActionData: pc.NewActionData(SetABI{
 			Account: account,
-			ABI:     eos.HexBytes(abiPacked),
+			ABI:     pc.HexBytes(abiPacked),
 		}),
 	}, nil
 }
 
 // NewSetCodeTx is _deprecated_. Use NewSetContract instead, and build
 // your transaction yourself.
-func NewSetCodeTx(account eos.AccountName, wasmPath, abiPath string) (out *eos.Transaction, err error) {
+func NewSetCodeTx(account pc.AccountName, wasmPath, abiPath string) (out *pc.Transaction, err error) {
 	actions, err := NewSetContract(account, wasmPath, abiPath)
 	if err != nil {
 		return nil, err
 	}
-	return &eos.Transaction{Actions: actions}, nil
+	return &pc.Transaction{Actions: actions}, nil
 }
 
 // SetCode represents the hard-coded `setcode` action.
 type SetCode struct {
-	Account   eos.AccountName `json:"account"`
+	Account   pc.AccountName `json:"account"`
 	VMType    byte            `json:"vmtype"`
 	VMVersion byte            `json:"vmversion"`
-	Code      eos.HexBytes    `json:"code"`
+	Code      pc.HexBytes    `json:"code"`
 }
 
 // SetABI represents the hard-coded `setabi` action.
 type SetABI struct {
-	Account eos.AccountName `json:"account"`
-	ABI     eos.HexBytes    `json:"abi"`
+	Account pc.AccountName `json:"account"`
+	ABI     pc.HexBytes    `json:"abi"`
 }

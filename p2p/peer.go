@@ -13,8 +13,8 @@ import (
 
 	"bufio"
 
-	"github.com/eoscanada/eos-go"
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 type Peer struct {
@@ -32,12 +32,12 @@ type Peer struct {
 }
 
 type HandshakeInfo struct {
-	ChainID                  eos.SHA256Bytes
+	ChainID                  pc.SHA256Bytes
 	HeadBlockNum             uint32
-	HeadBlockID              eos.SHA256Bytes
+	HeadBlockID              pc.SHA256Bytes
 	HeadBlockTime            time.Time
 	LastIrreversibleBlockNum uint32
-	LastIrreversibleBlockID  eos.SHA256Bytes
+	LastIrreversibleBlockID  pc.SHA256Bytes
 }
 
 func (h *HandshakeInfo) String() string {
@@ -71,8 +71,8 @@ func NewOutgoingPeer(address string, agent string, handshakeInfo *HandshakeInfo)
 	return newPeer(address, agent, false, handshakeInfo)
 }
 
-func (p *Peer) Read() (*eos.Packet, error) {
-	packet, err := eos.ReadPacket(p.reader)
+func (p *Peer) Read() (*pc.Packet, error) {
+	packet, err := pc.ReadPacket(p.reader)
 	if p.handshakeTimeout > 0 {
 		p.cancelHandshakeTimeout <- true
 	}
@@ -157,14 +157,14 @@ func (p *Peer) Write(bytes []byte) (int, error) {
 	return p.connection.Write(bytes)
 }
 
-func (p *Peer) WriteP2PMessage(message eos.P2PMessage) (err error) {
+func (p *Peer) WriteP2PMessage(message pc.P2PMessage) (err error) {
 
 	packet := &eos.Packet{
 		Type:       message.GetType(),
 		P2PMessage: message,
 	}
 
-	encoder := eos.NewEncoder(p.connection)
+	encoder := pc.NewEncoder(p.connection)
 	err = encoder.Encode(packet)
 
 	return
@@ -182,11 +182,11 @@ func (p *Peer) SendSyncRequest(startBlockNum uint32, endBlockNumber uint32) (err
 func (p *Peer) SendRequest(startBlockNum uint32, endBlockNumber uint32) (err error) {
 	fmt.Printf("SendRequest start [%d] end [%d]\n", startBlockNum, endBlockNumber)
 	request := &eos.RequestMessage{
-		ReqTrx: eos.OrderedBlockIDs{
+		ReqTrx: pc.OrderedBlockIDs{
 			Mode:    [4]byte{0, 0, 0, 0},
 			Pending: startBlockNum,
 		},
-		ReqBlocks: eos.OrderedBlockIDs{
+		ReqBlocks: pc.OrderedBlockIDs{
 			Mode:    [4]byte{0, 0, 0, 0},
 			Pending: endBlockNumber,
 		},
@@ -199,11 +199,11 @@ func (p *Peer) SendNotice(headBlockNum uint32, libNum uint32, mode byte) (err er
 	fmt.Printf("Send Notice head [%d] lib [%d] type[%d]\n", headBlockNum, libNum, mode)
 
 	notice := &eos.NoticeMessage{
-		KnownTrx: eos.OrderedBlockIDs{
+		KnownTrx: pc.OrderedBlockIDs{
 			Mode:    [4]byte{mode, 0, 0, 0},
 			Pending: headBlockNum,
 		},
-		KnownBlocks: eos.OrderedBlockIDs{
+		KnownBlocks: pc.OrderedBlockIDs{
 			Mode:    [4]byte{mode, 0, 0, 0},
 			Pending: libNum,
 		},
@@ -227,7 +227,7 @@ func (p *Peer) SendHandshake(info *HandshakeInfo) (err error) {
 		return
 	}
 
-	tstamp := eos.Tstamp{Time: info.HeadBlockTime}
+	tstamp := pc.Tstamp{Time: info.HeadBlockTime}
 
 	signature := ecc.Signature{
 		Curve:   ecc.CurveK1,

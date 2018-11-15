@@ -1,21 +1,21 @@
 package system
 
-import eos "github.com/eoscanada/eos-go"
+import  pc "github.com/darrennong/pc-go"
 
 // NewSetPriv returns a `setpriv` action that lives on the
 // `eosio.bios` contract. It should exist only when booting a new
 // network, as it is replaced using the `eos-bios` boot process by the
 // `eosio.system` contract.
-func NewSetPriv(account eos.AccountName) *eos.Action {
-	a := &eos.Action{
+func NewSetPriv(account pc.AccountName) *pc.Action {
+	a := &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("setpriv"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: AN("eosio"), Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(SetPriv{
+		ActionData: pc.NewActionData(SetPriv{
 			Account: account,
-			IsPriv:  eos.Bool(true),
+			IsPriv:  pc.Bool(true),
 		}),
 	}
 	return a
@@ -23,6 +23,6 @@ func NewSetPriv(account eos.AccountName) *eos.Action {
 
 // SetPriv sets privileged account status. Used in the bios boot mechanism.
 type SetPriv struct {
-	Account eos.AccountName `json:"account"`
-	IsPriv  eos.Bool        `json:"is_priv"`
+	Account pc.AccountName `json:"account"`
+	IsPriv  pc.Bool        `json:"is_priv"`
 }

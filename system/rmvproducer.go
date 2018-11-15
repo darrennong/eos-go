@@ -1,21 +1,21 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
 // NewRemoveProducer returns a `rmvproducer` action that lives on the
 // `eosio.system` contract.  This is to be called by the consortium of
 // BPs, to oust a BP from its place.  If you want to unregister
 // yourself as a BP, use `unregprod`.
-func NewRemoveProducer(producer eos.AccountName) *eos.Action {
-	return &eos.Action{
+func NewRemoveProducer(producer pc.AccountName) *pc.Action {
+	return &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("rmvproducer"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: AN("eosio"), Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(RemoveProducer{
+		ActionData: pc.NewActionData(RemoveProducer{
 			Producer: producer,
 		}),
 	}
@@ -23,5 +23,5 @@ func NewRemoveProducer(producer eos.AccountName) *eos.Action {
 
 // RemoveProducer represents the `eosio.system::rmvproducer` action
 type RemoveProducer struct {
-	Producer eos.AccountName `json:"producer"`
+	Producer pc.AccountName `json:"producer"`
 }

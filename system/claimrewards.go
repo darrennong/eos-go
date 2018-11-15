@@ -1,26 +1,26 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	pc "github.com/darrennong/pc-go"
 )
 
 // NewClaimRewards will buy at current market price a given number of
 // bytes of RAM, and grant them to the `receiver` account.
-func NewClaimRewards(owner eos.AccountName) *eos.Action {
-	a := &eos.Action{
-		Account: AN("eosio"),
+func NewClaimRewards(owner pc.AccountName) *pc.Action {
+	a := &pc.Action{
+		Account: AN("pcio"),
 		Name:    ActN("claimrewards"),
-		Authorization: []eos.PermissionLevel{
-			{Actor: owner, Permission: eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{Actor: owner, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(ClaimRewards{
+		ActionData: pc.NewActionData(ClaimRewards{
 			Owner: owner,
 		}),
 	}
 	return a
 }
 
-// ClaimRewards represents the `eosio.system::claimrewards` action.
+// ClaimRewards represents the `pcio.system::claimrewards` action.
 type ClaimRewards struct {
-	Owner eos.AccountName `json:"owner"`
+	Owner pc.AccountName `json:"owner"`
 }

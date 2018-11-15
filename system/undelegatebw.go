@@ -1,19 +1,19 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
 // NewUndelegateBW returns a `undelegatebw` action that lives on the
 // `eosio.system` contract.
-func NewUndelegateBW(from, receiver eos.AccountName, unstakeCPU, unstakeNet eos.Asset) *eos.Action {
-	return &eos.Action{
+func NewUndelegateBW(from, receiver pc.AccountName, unstakeCPU, unstakeNet pc.Asset) *pc.Action {
+	return &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("undelegatebw"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: from, Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(UndelegateBW{
+		ActionData: pc.NewActionData(UndelegateBW{
 			From:     from,
 			Receiver: receiver,
 			UnstakeNet: unstakeNet,
@@ -24,8 +24,8 @@ func NewUndelegateBW(from, receiver eos.AccountName, unstakeCPU, unstakeNet eos.
 
 // UndelegateBW represents the `eosio.system::undelegatebw` action.
 type UndelegateBW struct {
-	From         eos.AccountName `json:"from"`
-	Receiver     eos.AccountName `json:"receiver"`
-	UnstakeNet   eos.Asset       `json:"unstake_net_quantity"`
-	UnstakeCPU   eos.Asset       `json:"unstake_cpu_quantity"`
+	From         pc.AccountName `json:"from"`
+	Receiver     pc.AccountName `json:"receiver"`
+	UnstakeNet   pc.Asset       `json:"unstake_net_quantity"`
+	UnstakeCPU   pc.Asset       `json:"unstake_cpu_quantity"`
 }

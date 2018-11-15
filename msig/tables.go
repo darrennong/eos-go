@@ -1,10 +1,10 @@
 package msig
 
-import eos "github.com/eoscanada/eos-go"
+import  pc "github.com/darrennong/pc-go"
 
 type ProposalRow struct {
-	ProposalName       eos.Name              `json:"proposal_name"`
-	RequestedApprovals []eos.PermissionLevel `json:"requested_approvals"`
-	ProvidedApprovals  []eos.PermissionLevel `json:"provided_approvals"`
-	PackedTransaction  eos.HexBytes          `json:"packed_transaction"`
+	ProposalName       pc.Name              `json:"proposal_name"`
+	RequestedApprovals []pc.PermissionLevel `json:"requested_approvals"`
+	ProvidedApprovals  []pc.PermissionLevel `json:"provided_approvals"`
+	PackedTransaction  pc.HexBytes          `json:"packed_transaction"`
 }

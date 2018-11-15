@@ -1,17 +1,17 @@
 package system
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	pc "github.com/darrennong/pc-go"
 )
 
-func NewBidname(bidder, newname eos.AccountName, bid eos.Asset) *eos.Action {
-	a := &eos.Action{
+func NewBidname(bidder, newname pc.AccountName, bid pc.Asset) *pc.Action {
+	a := &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("bidname"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: bidder, Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(Bidname{
+		ActionData: pc.NewActionData(Bidname{
 			Bidder:  bidder,
 			Newname: newname,
 			Bid:     bid,
@@ -22,7 +22,7 @@ func NewBidname(bidder, newname eos.AccountName, bid eos.Asset) *eos.Action {
 
 // Bidname represents the `eosio.system_contract::bidname` action.
 type Bidname struct {
-	Bidder  eos.AccountName `json:"bidder"`
-	Newname eos.AccountName `json:"newname"`
-	Bid     eos.Asset       `json:"bid"` // specified in EOS
+	Bidder  pc.AccountName `json:"bidder"`
+	Newname pc.AccountName `json:"newname"`
+	Bid     pc.Asset       `json:"bid"` // specified in EOS
 }

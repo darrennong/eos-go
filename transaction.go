@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"bytes"
@@ -16,7 +16,7 @@ import (
 
 	"io/ioutil"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 type TransactionHeader struct {

@@ -1,7 +1,7 @@
 package msig
 
 import (
-	"github.com/eoscanada/eos-go"
+	"github.com/darrennong/pc-go"
 )
 
 func init() {
@@ -12,6 +12,6 @@ func init() {
 	eos.RegisterAction(AN("eosio.msig"), ActN("exec"), &Exec{})
 }
 
-var AN = eos.AN
-var PN = eos.PN
-var ActN = eos.ActN
+var AN = pc.AN
+var PN = pc.PN
+var ActN = pc.ActN

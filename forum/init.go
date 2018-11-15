@@ -1,6 +1,6 @@
 package forum
 
-import eos "github.com/eoscanada/eos-go"
+import  pc "github.com/darrennong/pc-go"
 
 func init() {
 	eos.RegisterAction(ForumAN, ActN("clnproposal"), CleanProposal{})
@@ -13,8 +13,8 @@ func init() {
 	eos.RegisterAction(ForumAN, ActN("vote"), Vote{})
 }
 
-var AN = eos.AN
-var PN = eos.PN
-var ActN = eos.ActN
+var AN = pc.AN
+var PN = pc.PN
+var ActN = pc.ActN
 
 var ForumAN = AN("eosforumrcpp")

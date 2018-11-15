@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"crypto/sha256"
@@ -8,7 +8,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 type P2PMessage interface {

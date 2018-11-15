@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"encoding/binary"
@@ -10,7 +10,7 @@ import (
 
 	"fmt"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -373,7 +373,7 @@ func TestDecoder_Encode(t *testing.T) {
 		F15: blockts,
 		F16: Varuint32(999),
 		F17: true,
-		F18: NewEOSAsset(100000),
+		F18: NewPCAsset(100000),
 	}
 
 	buf := new(bytes.Buffer)

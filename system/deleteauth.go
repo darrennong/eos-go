@@ -1,6 +1,6 @@
 package system
 
-import "github.com/eoscanada/eos-go"
+import "github.com/darrennong/pc-go"
 
 // NewDeleteAuth creates an action from the `eosio.system` contract
 // called `deleteauth`.
@@ -8,14 +8,14 @@ import "github.com/eoscanada/eos-go"
 // You cannot delete the `owner` or `active` permissions.  Also, if a
 // permission is still linked through a previous `updatelink` action,
 // you will need to `unlinkauth` first.
-func NewDeleteAuth(account eos.AccountName, permission eos.PermissionName) *eos.Action {
-	a := &eos.Action{
+func NewDeleteAuth(account pc.AccountName, permission pc.PermissionName) *pc.Action {
+	a := &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("deleteauth"),
-		Authorization: []eos.PermissionLevel{
-			{Actor: account, Permission: eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{Actor: account, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(DeleteAuth{
+		ActionData: pc.NewActionData(DeleteAuth{
 			Account:    account,
 			Permission: permission,
 		}),
@@ -27,6 +27,6 @@ func NewDeleteAuth(account eos.AccountName, permission eos.PermissionName) *eos.
 // DeleteAuth represents the native `deleteauth` action, reachable
 // through the `eosio.system` contract.
 type DeleteAuth struct {
-	Account    eos.AccountName    `json:"account"`
-	Permission eos.PermissionName `json:"permission"`
+	Account    pc.AccountName    `json:"account"`
+	Permission pc.PermissionName `json:"permission"`
 }

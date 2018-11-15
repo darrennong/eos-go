@@ -5,25 +5,25 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/eoscanada/eos-go"
+	"github.com/darrennong/pc-go"
 	"github.com/stretchr/testify/assert"
 )
 
 //func TestPackAction(t *testing.T) {
-//	a := &eos.Action{
+//	a := &pc.Action{
 //		Account: AN("eosio"),
 //		Name:    ActN("transfer"),
-//		Authorization: []eos.PermissionLevel{
+//		Authorization: []pc.PermissionLevel{
 //			{AN("eosio"), PN("active")},
 //		},
 //		Data: Transfer{
 //			From:     AN("abourget"),
 //			To:       AN("eosio"),
-//			Quantity: eos.Asset{Amount: 123123, Symbol: eos.EOSSymbol},
+//			Quantity: pc.Asset{Amount: 123123, Symbol: pc.EOSSymbol},
 //		},
 //	}
 //
-//	buf, err := eos.MarshalBinary(a)
+//	buf, err := pc.MarshalBinary(a)
 //	assert.NoError(t, err)
 //	assert.Equal(t, `0000000000ea3055000000572d3ccdcd010000000000ea305500000000a8ed32322100000059b1abe9310000000000ea3055f3e001000000000004454f530000000000`, hex.EncodeToString(buf))
 //
@@ -43,11 +43,11 @@ func TestUnpackActionTransfer(t *testing.T) {
 	}{
 		{
 			"00000003884ed1c900000000884ed1c90900000000000000000000000000000000",
-			Transfer{AN("tbcox2.3"), AN("tbcox2"), eos.Asset{Amount: 9}, ""},
+			Transfer{AN("tbcox2.3"), AN("tbcox2"), pc.Asset{Amount: 9}, ""},
 		},
 		{
 			"00000003884ed1c900000000884ed1c90900000000000000000000000000000004616c6c6f",
-			Transfer{AN("tbcox2.3"), AN("tbcox2"), eos.Asset{Amount: 9}, "allo"},
+			Transfer{AN("tbcox2.3"), AN("tbcox2"), pc.Asset{Amount: 9}, "allo"},
 		},
 	}
 
@@ -56,7 +56,7 @@ func TestUnpackActionTransfer(t *testing.T) {
 		assert.NoError(t, err)
 
 		var res Transfer
-		assert.NoError(t, eos.UnmarshalBinary(buf, &res), fmt.Sprintf("Index %d", idx))
+		assert.NoError(t, pc.UnmarshalBinary(buf, &res), fmt.Sprintf("Index %d", idx))
 		assert.Equal(t, test.out, res)
 	}
 

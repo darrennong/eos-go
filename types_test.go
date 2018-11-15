@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"encoding/binary"
@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -344,7 +344,7 @@ func TestNewAsset(t *testing.T) {
 	}
 }
 
-func TestNewEOSAssetFromString(t *testing.T) {
+func TestNewPCAssetFromString(t *testing.T) {
 
 	tests := []struct {
 		in     string
@@ -389,14 +389,14 @@ func TestNewEOSAssetFromString(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		asset, err := NewEOSAssetFromString(test.in)
+		asset, err := NewPCAssetFromString(test.in)
 		require.NoError(t, err)
 		assert.Equal(t, asset.Amount, int64(test.amount))
 		assert.Equal(t, asset.Symbol.Symbol, "EOS")
 		assert.Equal(t, asset.Symbol.Precision, uint8(4))
 	}
 
-	_, err := NewEOSAssetFromString("10.00001")
+	_, err := NewPCAssetFromString("10.00001")
 	assert.Error(t, err)
 }
 

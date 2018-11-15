@@ -1,8 +1,8 @@
 package bnet
 
 import (
-	eos "github.com/eoscanada/eos-go"
-	"github.com/eoscanada/eos-go/ecc"
+	 pc "github.com/darrennong/pc-go"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 type BNetMessageType byte
@@ -28,10 +28,10 @@ type Hello struct {
 	Password                 string            `json:"password"`
 	Agent                    string            `json:"agent"`
 	ProtocolVersion          string            `json:"protocol_version"`
-	ChainID                  eos.SHA256Bytes   `json:"chain_id"`
-	RequestTransactions      eos.Bool          `json:"request_transactions"`
+	ChainID                  pc.SHA256Bytes   `json:"chain_id"`
+	RequestTransactions      pc.Bool          `json:"request_transactions"`
 	LastIrreversibleBlockNum uint32            `json:"last_irr_block_num"`
-	PendingBlockIDs          []eos.SHA256Bytes `json:"pending_block_ids"`
+	PendingBlockIDs          []pc.SHA256Bytes `json:"pending_block_ids"`
 }
 
 /**
@@ -41,7 +41,7 @@ type Hello struct {
  * and informs a peer not to send this message.
  */
 type TransactionNotice struct {
-	SignedTransactionIDs []eos.SHA256Bytes ///< hash of trx + sigs
+	SignedTransactionIDs []pc.SHA256Bytes ///< hash of trx + sigs
 }
 
 /**
@@ -51,20 +51,20 @@ type TransactionNotice struct {
  * and informs the remote peer that there is no need to send this block.
  */
 type BlockNotice struct {
-	BlockIDs []eos.SHA256Bytes `json:"block_ids"`
+	BlockIDs []pc.SHA256Bytes `json:"block_ids"`
 }
 
 type Ping struct {
-	Sent                  eos.Tstamp      `json:"sent"`
-	Code                  eos.SHA256Bytes `json:"code"`
+	Sent                  pc.Tstamp      `json:"sent"`
+	Code                  pc.SHA256Bytes `json:"code"`
 	LastIrreversibleBlock uint32          `json:"lib"` /// last irreversible block
 }
 
 type Pong struct {
-	Sent eos.Tstamp      `json:"sent"`
-	Code eos.SHA256Bytes `json:"code"`
+	Sent pc.Tstamp      `json:"sent"`
+	Code pc.SHA256Bytes `json:"code"`
 }
 
 // Also use `eos.SignedBlock`
 // Also use `eos.SignedTransaction`
-var SignedBlock = eos.SignedTransaction{}
+var SignedBlock = pc.SignedTransaction{}

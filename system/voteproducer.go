@@ -1,19 +1,19 @@
 package system
 
-import "github.com/eoscanada/eos-go"
+import "github.com/darrennong/pc-go"
 
 // NewNonce returns a `nonce` action that lives on the
 // `eosio.bios` contract. It should exist only when booting a new
 // network, as it is replaced using the `eos-bios` boot process by the
 // `eosio.system` contract.
-func NewVoteProducer(voter eos.AccountName, proxy eos.AccountName, producers ...eos.AccountName) *eos.Action {
-	a := &eos.Action{
+func NewVoteProducer(voter pc.AccountName, proxy pc.AccountName, producers ...pc.AccountName) *pc.Action {
+	a := &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("voteproducer"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: voter, Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(
+		ActionData: pc.NewActionData(
 			VoteProducer{
 				Voter:     voter,
 				Proxy:     proxy,
@@ -26,7 +26,7 @@ func NewVoteProducer(voter eos.AccountName, proxy eos.AccountName, producers ...
 
 // VoteProducer represents the `eosio.system::voteproducer` action
 type VoteProducer struct {
-	Voter     eos.AccountName   `json:"voter"`
-	Proxy     eos.AccountName   `json:"proxy"`
-	Producers []eos.AccountName `json:"producers"`
+	Voter     pc.AccountName   `json:"voter"`
+	Proxy     pc.AccountName   `json:"proxy"`
+	Producers []pc.AccountName `json:"producers"`
 }

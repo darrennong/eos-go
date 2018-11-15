@@ -1,6 +1,6 @@
 package system
 
-import "github.com/eoscanada/eos-go"
+import "github.com/darrennong/pc-go"
 
 // NewCancelDelay creates an action from the `eosio.system` contract
 // called `canceldelay`.
@@ -9,14 +9,14 @@ import "github.com/eoscanada/eos-go"
 // previously sent to the chain with a `delay_sec` larger than 0.  You
 // need to sign with cancelingAuth, to cancel a transaction signed
 // with that same authority.
-func NewCancelDelay(cancelingAuth eos.PermissionLevel, transactionID eos.SHA256Bytes) *eos.Action {
-	a := &eos.Action{
+func NewCancelDelay(cancelingAuth pc.PermissionLevel, transactionID pc.SHA256Bytes) *pc.Action {
+	a := &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("canceldelay"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			cancelingAuth,
 		},
-		ActionData: eos.NewActionData(CancelDelay{
+		ActionData: pc.NewActionData(CancelDelay{
 			CancelingAuth: cancelingAuth,
 			TransactionID: transactionID,
 		}),
@@ -28,6 +28,6 @@ func NewCancelDelay(cancelingAuth eos.PermissionLevel, transactionID eos.SHA256B
 // CancelDelay represents the native `canceldelay` action, through the
 // system contract.
 type CancelDelay struct {
-	CancelingAuth eos.PermissionLevel `json:"canceling_auth"`
-	TransactionID eos.SHA256Bytes     `json:"trx_id"`
+	CancelingAuth pc.PermissionLevel `json:"canceling_auth"`
+	TransactionID pc.SHA256Bytes     `json:"trx_id"`
 }

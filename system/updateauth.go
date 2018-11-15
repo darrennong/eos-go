@@ -1,20 +1,20 @@
 package system
 
-import "github.com/eoscanada/eos-go"
+import "github.com/darrennong/pc-go"
 
 // NewUpdateAuth creates an action from the `eosio.system` contract
 // called `updateauth`.
 //
 // usingPermission needs to be `owner` if you want to modify the
 // `owner` authorization, otherwise `active` will do for the rest.
-func NewUpdateAuth(account eos.AccountName, permission, parent eos.PermissionName, authority eos.Authority, usingPermission eos.PermissionName) *eos.Action {
-	a := &eos.Action{
+func NewUpdateAuth(account pc.AccountName, permission, parent pc.PermissionName, authority pc.Authority, usingPermission pc.PermissionName) *pc.Action {
+	a := &pc.Action{
 		Account: AN("eosio"),
 		Name:    ActN("updateauth"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{account, usingPermission},
 		},
-		ActionData: eos.NewActionData(UpdateAuth{
+		ActionData: pc.NewActionData(UpdateAuth{
 			Account:    account,
 			Permission: permission,
 			Parent:     parent,
@@ -31,8 +31,8 @@ func NewUpdateAuth(account eos.AccountName, permission, parent eos.PermissionNam
 //
 // If you change the `owner` permission, there should be no parent.
 type UpdateAuth struct {
-	Account    eos.AccountName    `json:"account"`
-	Permission eos.PermissionName `json:"permission"`
-	Parent     eos.PermissionName `json:"parent"`
-	Auth       eos.Authority      `json:"auth"`
+	Account    pc.AccountName    `json:"account"`
+	Permission pc.PermissionName `json:"permission"`
+	Parent     pc.PermissionName `json:"parent"`
+	Auth       pc.Authority      `json:"auth"`
 }

@@ -1,18 +1,18 @@
 package forum
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
 // Status is an action to set a status update for a given account on the forum contract.
-func NewStatus(account eos.AccountName, content string) *eos.Action {
-	a := &eos.Action{
+func NewStatus(account pc.AccountName, content string) *pc.Action {
+	a := &pc.Action{
 		Account: ForumAN,
 		Name:    ActN("status"),
-		Authorization: []eos.PermissionLevel{
-			{Actor: account, Permission: eos.PermissionName("active")},
+		Authorization: []pc.PermissionLevel{
+			{Actor: account, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(Status{
+		ActionData: pc.NewActionData(Status{
 			Account: account,
 			Content: content,
 		}),
@@ -22,6 +22,6 @@ func NewStatus(account eos.AccountName, content string) *eos.Action {
 
 // Status represents the `eosio.forum::status` action.
 type Status struct {
-	Account eos.AccountName `json:"account_name"`
+	Account pc.AccountName `json:"account_name"`
 	Content string          `json:"content"`
 }

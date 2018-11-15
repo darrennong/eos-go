@@ -1,25 +1,25 @@
 package msig
 
 import (
-	eos "github.com/eoscanada/eos-go"
+	 pc "github.com/darrennong/pc-go"
 )
 
 // NewPropose returns a `propose` action that lives on the
 // `eosio.msig` contract.
-func NewPropose(proposer eos.AccountName, proposalName eos.Name, requested []eos.PermissionLevel, transaction *eos.Transaction) *eos.Action {
-	return &eos.Action{
-		Account: eos.AccountName("eosio.msig"),
-		Name:    eos.ActionName("propose"),
-		Authorization: []eos.PermissionLevel{
-			{Actor: proposer, Permission: eos.PermissionName("active")},
+func NewPropose(proposer pc.AccountName, proposalName pc.Name, requested []pc.PermissionLevel, transaction *pc.Transaction) *pc.Action {
+	return &pc.Action{
+		Account: pc.AccountName("eosio.msig"),
+		Name:    pc.ActionName("propose"),
+		Authorization: []pc.PermissionLevel{
+			{Actor: proposer, Permission: pc.PermissionName("active")},
 		},
-		ActionData: eos.NewActionData(Propose{proposer, proposalName, requested, transaction}),
+		ActionData: pc.NewActionData(Propose{proposer, proposalName, requested, transaction}),
 	}
 }
 
 type Propose struct {
-	Proposer     eos.AccountName       `json:"proposer"`
-	ProposalName eos.Name              `json:"proposal_name"`
-	Requested    []eos.PermissionLevel `json:"requested"`
-	Transaction  *eos.Transaction      `json:"trx"`
+	Proposer     pc.AccountName       `json:"proposer"`
+	ProposalName pc.Name              `json:"proposal_name"`
+	Requested    []pc.PermissionLevel `json:"requested"`
+	Transaction  *pc.Transaction      `json:"trx"`
 }

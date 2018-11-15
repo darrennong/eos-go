@@ -1,7 +1,7 @@
 package token
 
-import eos "github.com/eoscanada/eos-go"
+import  pc "github.com/darrennong/pc-go"
 
-var AN = eos.AN
-var PN = eos.PN
-var ActN = eos.ActN
+var AN = pc.AN
+var PN = pc.PN
+var ActN = pc.ActN

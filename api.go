@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"bytes"
@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 )
 
 type API struct {
@@ -527,7 +527,7 @@ func (api *API) call(baseAPI string, endpoint string, body interface{}, out inte
 		return err
 	}
 
-	targetURL := fmt.Sprintf("%s/v1/%s/%s", api.BaseURL, baseAPI, endpoint)
+	targetURL := fmt.Sprintf("%s/potato/%s/%s", api.BaseURL, baseAPI, endpoint)
 	req, err := http.NewRequest("POST", targetURL, jsonBody)
 	if err != nil {
 		return fmt.Errorf("NewRequest: %s", err)

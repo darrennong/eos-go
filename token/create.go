@@ -1,15 +1,15 @@
 package token
 
-import eos "github.com/eoscanada/eos-go"
+import  pc "github.com/darrennong/pc-go"
 
-func NewCreate(issuer eos.AccountName, maxSupply eos.Asset) *eos.Action {
-	return &eos.Action{
+func NewCreate(issuer pc.AccountName, maxSupply pc.Asset) *pc.Action {
+	return &pc.Action{
 		Account: AN("eosio.token"),
 		Name:    ActN("create"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: AN("eosio.token"), Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(Create{
+		ActionData: pc.NewActionData(Create{
 			Issuer:        issuer,
 			MaximumSupply: maxSupply,
 		}),
@@ -18,6 +18,6 @@ func NewCreate(issuer eos.AccountName, maxSupply eos.Asset) *eos.Action {
 
 // Create represents the `create` struct on the `eosio.token` contract.
 type Create struct {
-	Issuer        eos.AccountName `json:"issuer"`
-	MaximumSupply eos.Asset       `json:"maximum_supply"`
+	Issuer        pc.AccountName `json:"issuer"`
+	MaximumSupply pc.Asset       `json:"maximum_supply"`
 }

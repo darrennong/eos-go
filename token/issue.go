@@ -1,15 +1,15 @@
 package token
 
-import eos "github.com/eoscanada/eos-go"
+import  pc "github.com/darrennong/pc-go"
 
-func NewIssue(to eos.AccountName, quantity eos.Asset, memo string) *eos.Action {
-	return &eos.Action{
+func NewIssue(to pc.AccountName, quantity pc.Asset, memo string) *pc.Action {
+	return &pc.Action{
 		Account: AN("eosio.token"),
 		Name:    ActN("issue"),
-		Authorization: []eos.PermissionLevel{
+		Authorization: []pc.PermissionLevel{
 			{Actor: AN("eosio"), Permission: PN("active")},
 		},
-		ActionData: eos.NewActionData(Issue{
+		ActionData: pc.NewActionData(Issue{
 			To:       to,
 			Quantity: quantity,
 			Memo:     memo,
@@ -19,7 +19,7 @@ func NewIssue(to eos.AccountName, quantity eos.Asset, memo string) *eos.Action {
 
 // Issue represents the `issue` struct on the `eosio.token` contract.
 type Issue struct {
-	To       eos.AccountName `json:"to"`
-	Quantity eos.Asset       `json:"quantity"`
+	To       pc.AccountName `json:"to"`
+	Quantity pc.Asset       `json:"quantity"`
 	Memo     string          `json:"memo"`
 }

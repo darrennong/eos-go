@@ -1,4 +1,4 @@
-package eos
+package pc
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/eoscanada/eos-go/ecc"
+	"github.com/darrennong/pc-go/ecc"
 
 	"github.com/tidwall/gjson"
 
