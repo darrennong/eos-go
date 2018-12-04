@@ -6,7 +6,7 @@ import (
 
 func NewBidname(bidder, newname pc.AccountName, bid pc.Asset) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("bidname"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: bidder, Permission: PN("active")},

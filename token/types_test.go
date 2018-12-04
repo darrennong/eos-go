@@ -11,14 +11,14 @@ import (
 
 //func TestPackAction(t *testing.T) {
 //	a := &pc.Action{
-//		Account: AN("eosio"),
+//		Account: AN("potato"),
 //		Name:    ActN("transfer"),
 //		Authorization: []pc.PermissionLevel{
-//			{AN("eosio"), PN("active")},
+//			{AN("potato"), PN("active")},
 //		},
 //		Data: Transfer{
 //			From:     AN("abourget"),
-//			To:       AN("eosio"),
+//			To:       AN("potato"),
 //			Quantity: pc.Asset{Amount: 123123, Symbol: pc.EOSSymbol},
 //		},
 //	}

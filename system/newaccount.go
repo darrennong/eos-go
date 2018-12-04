@@ -9,7 +9,7 @@ import (
 // `eosio.system` contract.
 func NewNewAccount(creator, newAccount pc.AccountName, publicKey ecc.PublicKey) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("newaccount"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: creator, Permission: PN("active")},
@@ -46,7 +46,7 @@ func NewNewAccount(creator, newAccount pc.AccountName, publicKey ecc.PublicKey) 
 // delegates full control of the new account to an already existing account.
 func NewDelegatedNewAccount(creator, newAccount pc.AccountName, delegatedTo pc.AccountName) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("newaccount"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: creator, Permission: PN("active")},
@@ -89,7 +89,7 @@ func NewDelegatedNewAccount(creator, newAccount pc.AccountName, delegatedTo pc.A
 // `active` permissions.
 func NewCustomNewAccount(creator, newAccount pc.AccountName, owner, active pc.Authority) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("newaccount"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: creator, Permission: PN("active")},

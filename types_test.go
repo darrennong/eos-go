@@ -119,10 +119,10 @@ func FixmeTestPackTransaction(t *testing.T) {
 		},
 		Actions: []*Action{
 			{
-				Account: AccountName("eosio"),
+				Account: AccountName("potato"),
 				Name:    ActionName("transfer"),
 				Authorization: []PermissionLevel{
-					{AccountName("eosio"), PermissionName("active")},
+					{AccountName("potato"), PermissionName("active")},
 				},
 			},
 		},
@@ -283,7 +283,7 @@ func TestAuthorityBinaryMarshal(t *testing.T) {
 
 func TestActionNoData(t *testing.T) {
 	a := &Action{
-		Account: AccountName("eosio"),
+		Account: AccountName("potato"),
 		Name:    ActionName("transfer"),
 	}
 

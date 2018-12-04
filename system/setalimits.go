@@ -7,10 +7,10 @@ import (
 // NewSetalimits sets the account limits. Requires signature from `eosio@active` account.
 func NewSetalimits(account pc.AccountName, ramBytes, netWeight, cpuWeight int64) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("setalimit"),
 		Authorization: []pc.PermissionLevel{
-			{Actor: pc.AccountName("eosio"), Permission: PN("active")},
+			{Actor: pc.AccountName("potato"), Permission: PN("active")},
 		},
 		ActionData: pc.NewActionData(Setalimits{
 			Account:   account,

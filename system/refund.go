@@ -8,7 +8,7 @@ import (
 // `eosio.system` contract.
 func NewRefund(owner pc.AccountName) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("refund"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: owner, Permission: PN("active")},

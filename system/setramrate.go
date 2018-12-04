@@ -6,10 +6,10 @@ import (
 
 func NewSetRAMRate(bytesPerBlock uint16) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("setram"),
 		Authorization: []pc.PermissionLevel{
-			{AN("eosio"), pc.PermissionName("active")},
+			{AN("potato"), pc.PermissionName("active")},
 		},
 		ActionData: pc.NewActionData(SetRAMRate{
 			BytesPerBlock: bytesPerBlock,

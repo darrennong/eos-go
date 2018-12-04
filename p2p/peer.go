@@ -159,7 +159,7 @@ func (p *Peer) Write(bytes []byte) (int, error) {
 
 func (p *Peer) WriteP2PMessage(message pc.P2PMessage) (err error) {
 
-	packet := &eos.Packet{
+	packet := &pc.Packet{
 		Type:       message.GetType(),
 		P2PMessage: message,
 	}
@@ -172,7 +172,7 @@ func (p *Peer) WriteP2PMessage(message pc.P2PMessage) (err error) {
 
 func (p *Peer) SendSyncRequest(startBlockNum uint32, endBlockNumber uint32) (err error) {
 	println("SendSyncRequest start [%d] end [%d]\n", startBlockNum, endBlockNumber)
-	syncRequest := &eos.SyncRequestMessage{
+	syncRequest := &pc.SyncRequestMessage{
 		StartBlock: startBlockNum,
 		EndBlock:   endBlockNumber,
 	}
@@ -181,7 +181,7 @@ func (p *Peer) SendSyncRequest(startBlockNum uint32, endBlockNumber uint32) (err
 }
 func (p *Peer) SendRequest(startBlockNum uint32, endBlockNumber uint32) (err error) {
 	fmt.Printf("SendRequest start [%d] end [%d]\n", startBlockNum, endBlockNumber)
-	request := &eos.RequestMessage{
+	request := &pc.RequestMessage{
 		ReqTrx: pc.OrderedBlockIDs{
 			Mode:    [4]byte{0, 0, 0, 0},
 			Pending: startBlockNum,
@@ -198,7 +198,7 @@ func (p *Peer) SendRequest(startBlockNum uint32, endBlockNumber uint32) (err err
 func (p *Peer) SendNotice(headBlockNum uint32, libNum uint32, mode byte) (err error) {
 	fmt.Printf("Send Notice head [%d] lib [%d] type[%d]\n", headBlockNum, libNum, mode)
 
-	notice := &eos.NoticeMessage{
+	notice := &pc.NoticeMessage{
 		KnownTrx: pc.OrderedBlockIDs{
 			Mode:    [4]byte{mode, 0, 0, 0},
 			Pending: headBlockNum,
@@ -214,7 +214,7 @@ func (p *Peer) SendNotice(headBlockNum uint32, libNum uint32, mode byte) (err er
 func (p *Peer) SendTime() (err error) {
 	fmt.Printf("SendTime\n")
 
-	notice := &eos.TimeMessage{}
+	notice := &pc.TimeMessage{}
 	return p.WriteP2PMessage(notice)
 }
 
@@ -234,7 +234,7 @@ func (p *Peer) SendHandshake(info *HandshakeInfo) (err error) {
 		Content: make([]byte, 65, 65),
 	}
 
-	handshake := &eos.HandshakeMessage{
+	handshake := &pc.HandshakeMessage{
 		NetworkVersion:           1206,
 		ChainID:                  info.ChainID,
 		NodeID:                   p.NodeID,

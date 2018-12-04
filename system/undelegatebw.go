@@ -8,7 +8,7 @@ import (
 // `eosio.system` contract.
 func NewUndelegateBW(from, receiver pc.AccountName, unstakeCPU, unstakeNet pc.Asset) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("undelegatebw"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: from, Permission: PN("active")},

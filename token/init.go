@@ -3,7 +3,7 @@ package token
 import "github.com/darrennong/pc-go"
 
 func init() {
-	eos.RegisterAction(AN("eosio.token"), ActN("transfer"), Transfer{})
-	eos.RegisterAction(AN("eosio.token"), ActN("issue"), Issue{})
-	eos.RegisterAction(AN("eosio.token"), ActN("create"), Create{})
+	pc.RegisterAction(AN("pc.token"), ActN("transfer"), Transfer{})
+	pc.RegisterAction(AN("pc.token"), ActN("issue"), Issue{})
+	pc.RegisterAction(AN("pc.token"), ActN("create"), Create{})
 }

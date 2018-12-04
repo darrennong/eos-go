@@ -12,7 +12,7 @@ import (
 )
 
 const PublicKeyPrefix = "PUB_"
-const PublicKeyPrefixCompat = "PC"
+const PublicKeyPrefixCompat = "POC"
 
 type PublicKey struct {
 	Curve   CurveID

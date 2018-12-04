@@ -11,7 +11,7 @@ import "github.com/darrennong/pc-go"
 // with that same authority.
 func NewCancelDelay(cancelingAuth pc.PermissionLevel, transactionID pc.SHA256Bytes) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("canceldelay"),
 		Authorization: []pc.PermissionLevel{
 			cancelingAuth,

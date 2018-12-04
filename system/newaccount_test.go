@@ -18,18 +18,18 @@ func TestActionNewAccount(t *testing.T) {
 	pubKey, err := ecc.NewPublicKey("PUB_K1_6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV")
 	require.NoError(t, err)
 	a := &pc.Action{
-		Account: pc.AccountName("eosio"),
+		Account: pc.AccountName("potato"),
 		Name:    pc.ActionName("newaccount"),
 		Authorization: []pc.PermissionLevel{
-			{eos.AccountName("eosio"), pc.PermissionName("active")},
+			{pc.AccountName("potato"), pc.PermissionName("active")},
 		},
 		ActionData: pc.NewActionData(NewAccount{
-			Creator: pc.AccountName("eosio"),
+			Creator: pc.AccountName("potato"),
 			Name:    pc.AccountName("abourget"),
 			Owner: pc.Authority{
 				Threshold: 1,
-				Keys: []eos.KeyWeight{
-					eos.KeyWeight{
+				Keys: []pc.KeyWeight{
+					pc.KeyWeight{
 						PublicKey: pubKey,
 						Weight:    1,
 					},
@@ -37,8 +37,8 @@ func TestActionNewAccount(t *testing.T) {
 			},
 			Active: pc.Authority{
 				Threshold: 1,
-				Keys: []eos.KeyWeight{
-					eos.KeyWeight{
+				Keys: []pc.KeyWeight{
+					pc.KeyWeight{
 						PublicKey: pubKey,
 						Weight:    1,
 					},
@@ -46,7 +46,7 @@ func TestActionNewAccount(t *testing.T) {
 			},
 		}),
 	}
-	tx := &eos.Transaction{
+	tx := &pc.Transaction{
 		Actions: []*pc.Action{a},
 	}
 
@@ -75,17 +75,17 @@ func TestActionNewAccount(t *testing.T) {
 
 func TestMarshalTransactionAndSigned(t *testing.T) {
 	a := &pc.Action{
-		Account: pc.AccountName("eosio"),
+		Account: pc.AccountName("potato"),
 		Name:    pc.ActionName("newaccount"),
 		Authorization: []pc.PermissionLevel{
-			{eos.AccountName("eosio"), pc.PermissionName("active")},
+			{pc.AccountName("potato"), pc.PermissionName("active")},
 		},
 		ActionData: pc.NewActionData(NewAccount{
-			Creator: pc.AccountName("eosio"),
+			Creator: pc.AccountName("potato"),
 			Name:    pc.AccountName("abourget"),
 		}),
 	}
-	tx := &eos.SignedTransaction{Transaction: &eos.Transaction{
+	tx := &pc.SignedTransaction{Transaction: &pc.Transaction{
 		Actions: []*pc.Action{a},
 	}}
 
@@ -106,40 +106,40 @@ func TestMarshalTransactionAndSigned(t *testing.T) {
 
 func TestMarshalTransactionAndPack(t *testing.T) {
 	a := &pc.Action{
-		Account: pc.AccountName("eosio"),
+		Account: pc.AccountName("potato"),
 		Name:    pc.ActionName("newaccount"),
 		Authorization: []pc.PermissionLevel{
-			{eos.AccountName("eosio"), pc.PermissionName("active")},
+			{pc.AccountName("potato"), pc.PermissionName("active")},
 		},
 		ActionData: pc.NewActionData(NewAccount{
-			Creator: pc.AccountName("eosio"),
+			Creator: pc.AccountName("potato"),
 			Name:    pc.AccountName("abourget"),
 		}),
 	}
 	b := &pc.Action{
-		Account: pc.AccountName("eosio"),
+		Account: pc.AccountName("potato"),
 		Name:    pc.ActionName("transfer"),
 		Authorization: []pc.PermissionLevel{
-			{eos.AccountName("eosio"), pc.PermissionName("active")},
+			{pc.AccountName("potato"), pc.PermissionName("active")},
 		},
 		ActionData: pc.NewActionData(NewAccount{
-			Creator: pc.AccountName("eosio"),
+			Creator: pc.AccountName("potato"),
 			Name:    pc.AccountName("cbillett"),
 		}),
 	}
 
-	tx := &eos.Transaction{
+	tx := &pc.Transaction{
 		Actions: []*pc.Action{a, b},
 	}
 
 	buf, err := json.Marshal(tx)
 	fmt.Println("Transaction: ", string(buf))
 
-	signedTx := &eos.SignedTransaction{Transaction: tx}
+	signedTx := &pc.SignedTransaction{Transaction: tx}
 	buf, err = json.Marshal(signedTx)
 	fmt.Println("Signed Transaction: ", string(buf))
 
-	packedTx, err := signedTx.Pack(eos.CompressionNone)
+	packedTx, err := signedTx.Pack(pc.CompressionNone)
 	assert.NoError(t, err)
 
 	buf, err = json.Marshal(packedTx)

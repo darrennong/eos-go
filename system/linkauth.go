@@ -12,7 +12,7 @@ import "github.com/darrennong/pc-go"
 // can sign anything) for the given operation.
 func NewLinkAuth(account, code pc.AccountName, actionName pc.ActionName, requiredPermission pc.PermissionName) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("linkauth"),
 		Authorization: []pc.PermissionLevel{
 			{account, pc.PermissionName("active")},

@@ -8,10 +8,10 @@ import  pc "github.com/darrennong/pc-go"
 // `eosio.system` contract.
 func NewSetPriv(account pc.AccountName) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("setpriv"),
 		Authorization: []pc.PermissionLevel{
-			{Actor: AN("eosio"), Permission: PN("active")},
+			{Actor: AN("potato"), Permission: PN("active")},
 		},
 		ActionData: pc.NewActionData(SetPriv{
 			Account: account,

@@ -65,6 +65,6 @@ type Pong struct {
 	Code pc.SHA256Bytes `json:"code"`
 }
 
-// Also use `eos.SignedBlock`
-// Also use `eos.SignedTransaction`
+// Also use `pc.SignedBlock`
+// Also use `pc.SignedTransaction`
 var SignedBlock = pc.SignedTransaction{}

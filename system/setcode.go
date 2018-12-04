@@ -31,7 +31,7 @@ func NewSetContract(account pc.AccountName, wasmPath, abiPath string) (out []*pc
 
 	actions := []*pc.Action{
 		{
-			Account: AN("eosio"),
+			Account: AN("potato"),
 			Name:    ActN("setcode"),
 			Authorization: []pc.PermissionLevel{
 				{account, pc.PermissionName("active")},
@@ -44,7 +44,7 @@ func NewSetContract(account pc.AccountName, wasmPath, abiPath string) (out []*pc
 			}),
 		},
 		{
-			Account: AN("eosio"),
+			Account: AN("potato"),
 			Name:    ActN("setabi"),
 			Authorization: []pc.PermissionLevel{
 				{account, pc.PermissionName("active")},
@@ -65,7 +65,7 @@ func NewSetCode(account pc.AccountName, wasmPath string) (out *pc.Action, err er
 	}
 
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("setcode"),
 		Authorization: []pc.PermissionLevel{
 			{account, pc.PermissionName("active")},
@@ -96,7 +96,7 @@ func NewSetABI(account pc.AccountName, abiPath string) (out *pc.Action, err erro
 	}
 
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("setabi"),
 		Authorization: []pc.PermissionLevel{
 			{account, pc.PermissionName("active")},

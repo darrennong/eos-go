@@ -9,7 +9,7 @@ import "github.com/darrennong/pc-go"
 // `owner` authorization, otherwise `active` will do for the rest.
 func NewUpdateAuth(account pc.AccountName, permission, parent pc.PermissionName, authority pc.Authority, usingPermission pc.PermissionName) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("updateauth"),
 		Authorization: []pc.PermissionLevel{
 			{account, usingPermission},

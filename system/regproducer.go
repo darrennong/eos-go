@@ -9,7 +9,7 @@ import (
 // `eosio.system` contract.
 func NewRegProducer(producer pc.AccountName, producerKey ecc.PublicKey, url string, location uint16) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("regproducer"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: producer, Permission: PN("active")},

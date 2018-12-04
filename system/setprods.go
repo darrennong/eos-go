@@ -11,10 +11,10 @@ import (
 // `eosio.system` contract.
 func NewSetProds(producers []ProducerKey) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("setprods"),
 		Authorization: []pc.PermissionLevel{
-			{Actor: AN("eosio"), Permission: PN("active")},
+			{Actor: AN("potato"), Permission: PN("active")},
 		},
 		ActionData: pc.NewActionData(SetProds{
 			Schedule: producers,

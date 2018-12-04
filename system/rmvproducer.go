@@ -10,10 +10,10 @@ import (
 // yourself as a BP, use `unregprod`.
 func NewRemoveProducer(producer pc.AccountName) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("rmvproducer"),
 		Authorization: []pc.PermissionLevel{
-			{Actor: AN("eosio"), Permission: PN("active")},
+			{Actor: AN("potato"), Permission: PN("active")},
 		},
 		ActionData: pc.NewActionData(RemoveProducer{
 			Producer: producer,

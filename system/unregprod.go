@@ -8,7 +8,7 @@ import (
 // `eosio.system` contract.
 func NewUnregProducer(producer pc.AccountName) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("unregprod"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: producer, Permission: PN("active")},

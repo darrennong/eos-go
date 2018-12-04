@@ -7,8 +7,8 @@ import (
 // NewExec creates an `exec` action, found in the `eosio.sudo`
 // contract.
 //
-// Given an `eos.Transaction`, call `eos.MarshalBinary` on it first,
-// pass the resulting bytes as `eos.HexBytes` here.
+// Given an `pc.Transaction`, call `pc.MarshalBinary` on it first,
+// pass the resulting bytes as `pc.HexBytes` here.
 func NewExec(executer pc.AccountName, transaction pc.HexBytes) *pc.Action {
 	a := &pc.Action{
 		Account: pc.AccountName("eosio.sudo"),

@@ -187,7 +187,7 @@ type SymbolCode uint64
 
 // EOSSymbol represents the standard EOS symbol on the chain.  It's
 // here just to speed up things.
-var PCSymbol = Symbol{Precision: 4, Symbol: "PC"}
+var PCSymbol = Symbol{Precision: 4, Symbol: "POC"}
 
 func NewPCAssetFromString(amount string) (out Asset, err error) {
 	if len(amount) == 0 {

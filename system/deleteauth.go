@@ -10,7 +10,7 @@ import "github.com/darrennong/pc-go"
 // you will need to `unlinkauth` first.
 func NewDeleteAuth(account pc.AccountName, permission pc.PermissionName) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("deleteauth"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: account, Permission: pc.PermissionName("active")},

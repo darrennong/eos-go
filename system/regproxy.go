@@ -8,7 +8,7 @@ import (
 // `eosio.system` contract.
 func NewRegProxy(proxy pc.AccountName, isProxy bool) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("regproxy"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: proxy, Permission: PN("active")},

@@ -4,7 +4,7 @@ import  pc "github.com/darrennong/pc-go"
 
 func NewTransfer(from, to pc.AccountName, quantity pc.Asset, memo string) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio.token"),
+		Account: AN("pc.token"),
 		Name:    ActN("transfer"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: from, Permission: PN("active")},
@@ -18,7 +18,7 @@ func NewTransfer(from, to pc.AccountName, quantity pc.Asset, memo string) *pc.Ac
 	}
 }
 
-// Transfer represents the `transfer` struct on `eosio.token` contract.
+// Transfer represents the `transfer` struct on `pc.token` contract.
 type Transfer struct {
 	From     pc.AccountName `json:"from"`
 	To       pc.AccountName `json:"to"`

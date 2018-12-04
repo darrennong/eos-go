@@ -9,7 +9,7 @@ import "github.com/darrennong/pc-go"
 // `code::actionName`. See `linkauth`.
 func NewUnlinkAuth(account, code pc.AccountName, actionName pc.ActionName) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("unlinkauth"),
 		Authorization: []pc.PermissionLevel{
 			{account, pc.PermissionName("active")},

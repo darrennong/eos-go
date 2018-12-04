@@ -8,7 +8,7 @@ import (
 // bytes of RAM.
 func NewSellRAM(account pc.AccountName, bytes uint64) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("sellram"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: account, Permission: pc.PermissionName("active")},

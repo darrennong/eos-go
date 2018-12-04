@@ -8,7 +8,7 @@ import "github.com/darrennong/pc-go"
 // `eosio.system` contract.
 func NewVoteProducer(voter pc.AccountName, proxy pc.AccountName, producers ...pc.AccountName) *pc.Action {
 	a := &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("voteproducer"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: voter, Permission: PN("active")},

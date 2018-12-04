@@ -8,7 +8,7 @@ import (
 // `eosio.system` contract.
 func NewDelegateBW(from, receiver pc.AccountName, stakeCPU, stakeNet pc.Asset, transfer bool) *pc.Action {
 	return &pc.Action{
-		Account: AN("eosio"),
+		Account: AN("potato"),
 		Name:    ActN("delegatebw"),
 		Authorization: []pc.PermissionLevel{
 			{Actor: from, Permission: PN("active")},
